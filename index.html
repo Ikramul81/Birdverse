@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Birdverse — Discover the Universe of Birds</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ====== Basic Reset ====== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html,body { height:100%; }
+    body {
+      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      color: #222;
+      background: #FAFBFF;
+      -webkit-font-smoothing:antialiased;
+      line-height:1.45;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ====== Header / Nav ====== */
+    .site-header {
+      background: linear-gradient(90deg, #87CEFA 0%, #E6F7FF 100%);
+      padding: 18px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      box-shadow: 0 2px 6px rgba(20,30,40,0.06);
+    }
+    .container { max-width:1100px; margin:0 auto; padding:0 16px; }
+
+    .nav {
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .brand {
+      display:flex; align-items:center; gap:12px;
+    }
+    .logo {
+      width:46px; height:46px; border-radius:10px; background: white;
+      display:flex; align-items:center; justify-content:center; font-weight:700; color:#4B9CE2;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+    .brand h1 { font-size:18px; color:#0F1724; }
+    .brand p { font-size:12px; color:#064E3B; margin-top:2px; }
+
+    .nav-links { display:flex; gap:18px; align-items:center; }
+    .nav-links a { font-weight:600; font-size:14px; color:#073B4C; padding:8px 10px; border-radius:8px; }
+    .nav-links a.cta { background:#FFDD57; color:#222; box-shadow: 0 4px 10px rgba(255,221,87,0.25); }
+
+    /* Hamburger for small screens */
+    .hamburger { display:none; cursor:pointer; font-size:22px; }
+
+    /* ====== Hero ====== */
+    .hero {
+      padding:36px 0 48px;
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:28px;
+      align-items:center;
+    }
+    .hero .text h2 { font-size:34px; margin-bottom:12px; color:#073B4C; }
+    .hero .text p { color:#334155; margin-bottom:18px; }
+    .search-bar { display:flex; gap:8px; }
+    .search-bar input {
+      flex:1; padding:12px 14px; border-radius:8px; border:1px solid #E6EEF8;
+      outline:none; font-size:14px; background:white;
+    }
+    .search-bar button {
+      padding:12px 16px; border-radius:8px; border:none; background:#4B9CE2; color:white; font-weight:600;
+    }
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,255,0.8));
+      border-radius:12px; padding:16px;
+      box-shadow: 0 8px 26px rgba(20,30,40,0.06);
+    }
+    .hero-card img { width:100%; border-radius:10px; display:block; }
+
+    /* ====== Categories / Shop ====== */
+    .section { padding:28px 0; }
+    .section h3 { font-size:20px; color:#0F1724; margin-bottom:12px; }
+    .grid { display:grid; gap:14px; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+
+    .card {
+      background: white; border-radius:10px; padding:10px; text-align:center;
+      box-shadow: 0 6px 18px rgba(15,23,36,0.04);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .card img { width:100%; height:140px; object-fit:cover; border-radius:8px; margin-bottom:10px; }
+    .card h4 { margin-bottom:6px; font-size:15px; color:#0B2545; }
+    .card p { font-size:13px; color:#475569; margin-bottom:10px; }
+    .card button { padding:8px 12px; border-radius:8px; border:none; background:#FFB86B; font-weight:600; cursor:pointer; }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(10,20,40,0.08); }
+
+    /* ====== Gallery ====== */
+    .masonry { display:grid; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); gap:10px; }
+
+    /* ====== Footer ====== */
+    footer { padding:24px 0; color:#475569; border-top:1px solid #EEF2FF; margin-top:24px; }
+    .footer-grid { display:grid; grid-template-columns: 1fr 240px; gap:18px; align-items:start; }
+    .socials { display:flex; gap:10px; margin-top:10px; }
+    .chip { background:#F8FAFF; padding:8px 10px; border-radius:999px; font-weight:600; font-size:13px; }
+
+    /* ====== Responsive ====== */
+    @media (max-width:880px) {
+      .hero { grid-template-columns: 1fr; }
+      .nav-links { display:none; }
+      .hamburger { display:block; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+
+    /* small helpers */
+    .muted { color:#64748B; font-size:14px; }
+    .badge { display:inline-block; background:#E6F5EA; color:#0B6E3A; padding:6px 8px; border-radius:999px; font-weight:600; font-size:13px; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo">Bv</div>
+        <div>
+          <h1>Birdverse</h1>
+          <p style="font-size:12px;">Discover the Universe of Birds</p>
+        </div>
+      </div>
+
+      <nav class="nav-links" aria-label="Main Navigation">
+        <a href="#shop">Shop</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="cta">Contact</a>
+      </nav>
+
+      <div class="hamburger" onclick="toggleMobileNav()">☰</div>
+    </div>
+  </header>
+
+  <!-- mobile nav (invisible on desktop) -->
+  <div id="mobileNav" style="display:none; background:#fff; box-shadow:0 10px 30px rgba(10,20,40,0.06);">
+    <div class="container" style="padding:12px 16px;">
+      <a href="#shop" style="display:block; padding:10px 0;">Shop</a>
+      <a href="#gallery" style="display:block; padding:10px 0;">Gallery</a>
+      <a href="#about" style="display:block; padding:10px 0;">About</a>
+      <a href="#contact" style="display:block; padding:10px 0;">Contact</a>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero section">
+      <div class="text">
+        <h2>Welcome to Birdverse</h2>
+        <p class="muted">Sun Conure, Budgerigar, Macaw, Lovebirds, Cockatiel — এবং সব ধরনের পাখি ও অ্যাকসেসরিজ এক জায়গায়।</p>
+
+        <div style="display:flex; gap:10px; margin-top:14px; align-items:center;">
+          <div style="flex:1;">
+            <div class="search-bar">
+              <input type="search" id="q" placeholder="Search birds or accessories (e.g. macaw, cage, feed)" />
+              <button onclick="searchSite()">Search</button>
+            </div>
+          </div>
+          <div>
+            <div class="chip">Free Delivery over ৳2000</div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px;">
+          <span class="badge">New</span>
+          <span style="margin-left:10px;" class="muted">Exotic arrivals — Check our macaw collection</span>
+        </div>
+      </div>
+
+      <aside class="hero-card" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1560807707-8cc77767d783?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Colorful macaw bird" />
+      </aside>
+    </section>
+
+    <!-- SHOP / CATEGORIES -->
+    <section id="shop" class="section">
+      <h3>Categories</h3>
+      <div class="grid" style="margin-top:12px;">
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=Sun+Conure" alt="Sun Conure" />
+          <h4>Sun Conure</h4>
+          <p class="muted">Colorful & playful</p>
+          <button>View</button>
+        </div>
+
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=Budgerigar" alt="Budgerigar" />
+          <h4>Budgerigar (Bagigar)</h4>
+          <p class="muted">Small & friendly</p>
+          <button>View</button>
+        </div>
+
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=Macaw" alt="Macaw" />
+          <h4>Macaw</h4>
+          <p class="muted">Large & exotic</p>
+          <button>View</button>
+        </div>
+
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=Cockatiel" alt="Cockatiel" />
+          <h4>Cockatiel</h4>
+          <p class="muted">Gentle & affectionate</p>
+          <button>View</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Accessories -->
+    <section class="section">
+      <h3>Accessories</h3>
+      <div class="grid" style="margin-top:12px;">
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=Cage" alt="Bird cage" />
+          <h4>Cages & Stands</h4>
+          <p class="muted">Comfort & safety</p>
+          <button>Shop</button>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=Food" alt="Bird food" />
+          <h4>Food & Supplements</h4>
+          <p class="muted">Nutrition-packed</p>
+          <button>Shop</button>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=Toy" alt="Bird toy" />
+          <h4>Toys & Perches</h4>
+          <p class="muted">Playtime essentials</p>
+          <button>Shop</button>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/400x250?text=Groom" alt="Grooming" />
+          <h4>Grooming Kits</h4>
+          <p class="muted">Care & hygiene</p>
+          <button>Shop</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="section">
+      <h3>Gallery</h3>
+      <div class="masonry" style="margin-top:12px;">
+        <img src="https://via.placeholder.com/400x350?text=Bird+1" alt="" style="width:100%; border-radius:8px;" />
+        <img src="https://via.placeholder.com/400x300?text=Bird+2" alt="" style="width:100%; border-radius:8px;" />
+        <img src="https://via.placeholder.com/400x260?text=Bird+3" alt="" style="width:100%; border-radius:8px;" />
+        <img src="https://via.placeholder.com/400x360?text=Bird+4" alt="" style="width:100%; border-radius:8px;" />
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section">
+      <h3>About Birdverse</h3>
+      <p class="muted" style="margin-top:8px;">
+        Birdverse এ আমরা প্রতিটি পাখির কল্যাণকে গুরুত্ব দিই — নিরাপদ পরিবহন, সঠিক খাওয়া এবং পোষা পাখিদের জন্য মানসম্মত অ্যাক্সেসরিজ সরবরাহ করি। আমাদের লক্ষ্য — পাখি ও তাদের মালিকের মধ্যে সুস্থ সম্পর্ক গড়ে তোলা।
+      </p>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+      <h3>Contact Us</h3>
+      <div style="display:grid; grid-template-columns: 1fr 320px; gap:18px; margin-top:12px;">
+        <form onsubmit="handleContact(event)" style="background:#fff; padding:14px; border-radius:10px; box-shadow:0 6px 18px rgba(10,20,40,0.04);">
+          <div style="display:grid; gap:10px;">
+            <input required type="text" id="name" placeholder="Name" style="padding:10px; border-radius:8px; border:1px solid #EEF2FF;" />
+            <input required type="email" id="email" placeholder="Email" style="padding:10px; border-radius:8px; border:1px solid #EEF2FF;" />
+            <input type="text" id="phone" placeholder="Phone (optional)" style="padding:10px; border-radius:8px; border:1px solid #EEF2FF;" />
+            <textarea id="message" required placeholder="Message" rows="5" style="padding:10px; border-radius:8px; border:1px solid #EEF2FF;"></textarea>
+            <div style="display:flex; gap:8px; align-items:center;">
+              <button type="submit" style="padding:10px 14px; border-radius:8px; border:none; background:#4B9CE2; color:white; font-weight:700;">Send</button>
+              <div class="muted" style="font-size:13px;">Or WhatsApp: <strong>+8801XXXXXXXXX</strong></div>
+            </div>
+          </div>
+        </form>
+
+        <aside style="background:#fff; padding:14px; border-radius:10px; box-shadow:0 6px 18px rgba(10,20,40,0.04);">
+          <h4>Store Info</h4>
+          <p class="muted" style="margin-top:8px;">Dhaka, Bangladesh<br/>Mon–Sat: 10:00–18:00</p>
+
+          <div style="margin-top:12px;">
+            <strong>Follow us</strong>
+            <div class="socials">
+              <a class="chip" href="#">Facebook</a>
+              <a class="chip" href="#">Instagram</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <strong>Birdverse</strong>
+        <p class="muted" style="margin-top:8px;">Discover the Universe of Birds — Sun Conure, Macaw, Lovebirds, Cockatiel ও আরও অনেক কিছু।</p>
+        <small class="muted" style="display:block; margin-top:10px;">© <span id="yr"></span> Birdverse — All rights reserved.</small>
+      </div>
+
+      <div style="text-align:right;">
+        <div style="font-weight:700;">Quick Links</div>
+        <div style="margin-top:8px;" class="muted">
+          <div><a href="#shop">Shop</a></div>
+          <div><a href="#gallery">Gallery</a></div>
+          <div><a href="#contact">Contact</a></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // small JS helpers
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    function toggleMobileNav(){
+      const el = document.getElementById('mobileNav');
+      el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+
+    function searchSite(){
+      const q = document.getElementById('q').value.trim();
+      if(!q){ alert('Search query likho (e.g. macaw)'); return; }
+      alert('আপনি "'+q+'" খুঁজছেন — (demo) এই ফিচারটি পরে সার্চ বা shop filter দিয়ে যুক্ত করা যাবে।');
+    }
+
+    function handleContact(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const msg = document.getElementById('message').value.trim();
+      if(!name || !email || !msg){ alert('সব ফিল্ড পূরণ করুন'); return; }
+      // demo behaviour: open mailto with prefilled content (real site should use backend)
+      const subject = encodeURIComponent('Contact from Birdverse: ' + name);
+      const body = encodeURIComponent('Name: '+name+'\nEmail: '+email+'\nMessage:\n'+msg);
+      window.location.href = 'mailto:info@birdverse.com?subject='+subject+'&body='+body;
+    }
+  </script>
+</body>
+</html>
